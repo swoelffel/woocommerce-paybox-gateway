@@ -40,7 +40,6 @@ function woocommerce_paybox_init() {
             // Get setting values
             foreach ($this->settings as $key => $val)
                 $this->$key = $val;
-            $this->icon = PLUGIN_DIR . 'images/cards.png';
             // Logs
             if ($this->debug == 'yes')
                 $this->log = $woocommerce->logger();
