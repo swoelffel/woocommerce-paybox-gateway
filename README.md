@@ -15,10 +15,13 @@ Payment gateway using Paybox System
 
 == Installation ==
 
+0. Download the appropritate executable at http://www1.paybox.com/telechargement_focus.aspx?cat=3
+    Please note that Plug-in uses the CGI as a regular executable, not through a browser
+
 1. Upload to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. copy Paybox CGI to a directory visible by Apache on your server
-4. Be careful to setup permissions for this file
+3. copy Paybox CGI (downloaded at step 0) to a directory visible by Apache on your server
+4. Be careful to setup permissions for this file (readable, executable by Apache)
 5. Fill parameters in the Admin dedicated screen
 
 == Frequently Asked Questions ==
