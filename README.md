@@ -36,3 +36,6 @@ Nothing to do
 
 = 0.1.0 =
 first version.
+
+= 0.2.0 =
+Check compatibility wih WooCommerce 2.0
