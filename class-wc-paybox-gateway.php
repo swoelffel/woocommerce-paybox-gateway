@@ -289,6 +289,7 @@ function woocommerce_paybox_init() {
         }
 
     }
+
     // Fin de la classe
     /*
      * Ajout de la "gateway" Paybox à woocommerce
@@ -312,8 +313,8 @@ function woocommerce_paybox_init() {
  * @return void
  */
 function woocommerce_paybox_check_response() {
-    $order = new WC_Order((int) $_GET['order']); // On récupère la commande
-    if ($order) {
+    if (isset($_GET['order']) && isset($_GET['sign'])) { // On a bien un retour ave une commande et une signature
+        $order = new WC_Order((int) $_GET['order']); // On récupère la commande
         $pos_qs = strpos($_SERVER['REQUEST_URI'], '?');
         $pos_sign = strpos($_SERVER['REQUEST_URI'], '&sign=');
         $return_url = substr($_SERVER['REQUEST_URI'], 1, $pos_qs - 1);
@@ -326,47 +327,48 @@ function woocommerce_paybox_check_response() {
             @ob_clean();
             // Traitement du retour PayBox
             // PBX_RETOUR=order:R;erreur:E;carte:C;numauto:A;numtrans:S;numabo:B;montantbanque:M;sign:K
-            // paybox_log($_GET);
-            switch ($_GET['erreur']) {
-                case '00000':
-                    // OK Pad de pb
-                    // On vérifie la clef
-                    // recuperation de la cle publique
-                    $fp = $filedata = $key = FALSE;
-                    $fsize = filesize(dirname(__FILE__) . '/lib/pubkey.pem');
-                    $fp = fopen(dirname(__FILE__) . '/lib/pubkey.pem', 'r');
-                    $filedata = fread($fp, $fsize);
-                    fclose($fp);
-                    $key = openssl_pkey_get_public($filedata);
-                    $decoded_sign = base64_decode(urldecode($sign));
-                    $verif_sign = openssl_verify($data, $decoded_sign, $key);
-                    if ($verif_sign == 1) { // La commande est bien signé par PayBox
-                        // Si montant ok
-                        if ((int) (100 * $order->get_total()) == (int) $_GET['montantbanque']) {
-                            $order->add_order_note('<b>Paybox Return OK</b><br/>' . $std_msg);
-                            $order->payment_complete();
-                            header('HTTP/1.1 200 OK');
-                            wp_die('OK');
+            if (isset($_GET['erreur'])) {
+                switch ($_GET['erreur']) {
+                    case '00000':
+                        // OK Pas de pb
+                        // On vérifie la clef
+                        // recuperation de la cle publique
+                        $fp = $filedata = $key = FALSE;
+                        $fsize = filesize(dirname(__FILE__) . '/lib/pubkey.pem');
+                        $fp = fopen(dirname(__FILE__) . '/lib/pubkey.pem', 'r');
+                        $filedata = fread($fp, $fsize);
+                        fclose($fp);
+                        $key = openssl_pkey_get_public($filedata);
+                        $decoded_sign = base64_decode(urldecode($sign));
+                        $verif_sign = openssl_verify($data, $decoded_sign, $key);
+                        if ($verif_sign == 1) { // La commande est bien signé par PayBox
+                            // Si montant ok
+                            if ((int) (100 * $order->get_total()) == (int) $_GET['montantbanque']) {
+                                $order->add_order_note('<p style="color:green"><b>Paybox Return OK</b></p><br/>' . $std_msg);
+                                $order->payment_complete();
+                                header('HTTP/1.1 200 OK');
+                                wp_die('OK');
+                            } else {
+                                $order->add_order_note('<p style="color:red"><b>ERROR</b></p> Order Amount<br/>' . $std_msg);
+                                header('HTTP/1.1 406');
+                                wp_die('KO Amount modified : ' . $_GET['montantbanque'] . ' / ' . (100 * $order->get_total()));
+                            }
                         } else {
-                            $order->add_order_note('<p style="color:red"><b>ERROR</b></p> Order Amount<br/>' . $std_msg);
+                            $order->add_order_note('<p style="color:red"><b>ERROR</b></p> Signature Rejected<br/>' . $std_msg);
                             header('HTTP/1.1 406');
-                            wp_die('KO Amount modified : ' . $_GET['montantbanque'] . ' / ' . (100 * $order->get_total()));
+                            wp_die('KO Signature');
                         }
-                    } else {
-                        $order->add_order_note('<p style="color:red"><b>ERROR</b></p> Signature Rejected<br/>' . $std_msg);
-                        header('HTTP/1.1 406');
-                        wp_die('KO Signature');
-                    }
-                    break;
-                default:
-                    $order->add_order_note('<p style="color:red"><b>PBX ERROR ' . $_GET['erreur'] . '</b> ' . WC_Paybox::getErreurMsg($_GET['erreur']) . '</p><br/>' . $std_msg);
-                    header('HTTP/1.1 200 OK');
-                    wp_die('OK received');
-                    break;
+                        break;
+                    default:
+                        $order->add_order_note('<p style="color:red"><b>PBX ERROR ' . $_GET['erreur'] . '</b> ' . WC_Paybox::getErreurMsg($_GET['erreur']) . '</p><br/>' . $std_msg);
+                        header('HTTP/1.1 200 OK');
+                        wp_die('OK received');
+                        break;
+                }
+            } else {
+                header('HTTP/1.1 200 OK');
+                wp_die('Test AutoResponse OK');
             }
         }
-    } else {
-        header('HTTP/1.1 200 OK');
-        wp_die('KO Unknown order : ' . $_GET['order']);
     }
 }

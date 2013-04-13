@@ -39,3 +39,6 @@ first version.
 
 = 0.2.0 =
 Check compatibility wih WooCommerce 2.0
+
+= 0.2.1 =
+Improve autoresponse controls and allow webmaster testing.
