@@ -42,3 +42,6 @@ Check compatibility wih WooCommerce 2.0
 
 = 0.2.1 =
 Improve autoresponse controls and allow webmaster testing.
+
+= 0.2.2 =
+Solve an issue blocking parameters saving on Payment Gateways back office.
