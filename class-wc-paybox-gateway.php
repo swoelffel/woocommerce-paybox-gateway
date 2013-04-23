@@ -135,6 +135,12 @@ function woocommerce_paybox_init() {
                     'description' => __('Please enter back link from PayBox (where you need to put the [im4woo_thankyou] shortcode).', 'woocommerce'),
                     'default' => '/checkout/order-received/'
                 ),
+                'paybox_url' => array(
+                    'title' => __('Paybox URL', 'woocommerce'),
+                    'type' => 'text',
+                    'description' => __('Please enter the posting URL for paybox Form <br/>For testing : https://preprod-tpeweb.paybox.com/cgi/MYchoix_pagepaiement.cgi<br/>For production : https://tpeweb.paybox.com/cgi/MYchoix_pagepaiement.cgi', 'woocommerce'),
+                    'default' => 'https://tpeweb.paybox.com/cgi/MYchoix_pagepaiement.cgi'
+                ),
                 'prepost_message' => array(
                     'title' => __('Customer Message', 'woocommerce'),
                     'type' => 'textarea',
@@ -203,6 +209,7 @@ function woocommerce_paybox_init() {
             $param .= ' PBX_RANG=' . $this->paybox_rang;
             $param .= ' PBX_TOTAL=' . 100 * $order->get_total();
             $param .= ' PBX_CMD=' . $order->id;
+            $param .= ' PBX_CMD=' . $order->paybox_url;
             //$param .= ' PBX_CLE=' . $this->paybox_key;
             $param .= ' PBX_REPONDRE_A=http://' . str_replace('//', '/', $_SERVER['HTTP_HOST'] . '/' . $this->return_url);
             $param .= ' PBX_EFFECTUE=http://' . str_replace('//', '/', $_SERVER['HTTP_HOST'] . '/' . $this->back_url);
