@@ -4,7 +4,7 @@
  * Plugin Name: WooCommerce Paybox Payment Gateway
  * Plugin URI: http://www.castelis.com/woocommerce/
  * Description: Gateway e-commerce pour Paybox.
- * Version: 0.2.0
+ * Version: 0.2.2
  * Author: Castelis
  * Author URI: http://www.castelis.com/
  * License: GPL version 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
