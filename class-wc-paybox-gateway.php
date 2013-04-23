@@ -23,7 +23,7 @@ function woocommerce_paybox_init() {
     DEFINE('PLUGIN_DIR', plugins_url(basename(plugin_dir_path(__FILE__)), basename(__FILE__)) . '/');
 
     /*
-     * Inspire Commerce Gateway Class
+     * Paybox Commerce Gateway Class
      */
 
     class WC_Paybox extends WC_Payment_Gateway {
@@ -46,6 +46,7 @@ function woocommerce_paybox_init() {
 
             // Ajout des Hooks
             add_action('woocommerce_update_options_payment_gateways', array(&$this, 'process_admin_options'));
+            add_action('woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ));
             add_action('woocommerce_thankyou_paybox', array(&$this, 'thankyou_page'));
         }
 
