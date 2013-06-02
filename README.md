@@ -45,3 +45,6 @@ Improve autoresponse controls and allow webmaster testing.
 
 = 0.2.2 =
 Solve an issue blocking parameters saving on Payment Gateways back office.
+
+= 0.2.3 =
+Add 2 paybox parameters for callback Cancel or Failed (dedicated URL)
