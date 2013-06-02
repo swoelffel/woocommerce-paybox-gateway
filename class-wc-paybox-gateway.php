@@ -129,11 +129,23 @@ function woocommerce_paybox_init() {
                     'description' => __('Please enter the autoreponse URL for PayBox.', 'woocommerce'),
                     'default' => '/paybox_autoresponse'
                 ),
-                'back_url' => array(
-                    'title' => __('Return Link', 'woocommerce'),
+                'callback_success_url' => array(
+                    'title' => __('Successful Return Link', 'woocommerce'),
                     'type' => 'text',
-                    'description' => __('Please enter back link from PayBox (where you need to put the [im4woo_thankyou] shortcode).', 'woocommerce'),
+                    'description' => __('Please enter callback link from PayBox when transaction succeed (where you need to put the [im4woo_thankyou] shortcode).', 'woocommerce'),
                     'default' => '/checkout/order-received/'
+                ),
+                'callback_refused_url' => array(
+                    'title' => __('Failed Return Link', 'woocommerce'),
+                    'type' => 'text',
+                    'description' => __('Please enter callback link from PayBox when transaction is refused by gateway.', 'woocommerce'),
+                    'default' => '/checkout/order-refused/'
+                ),
+                'callback_cancel_url' => array(
+                    'title' => __('Cancel Return Link', 'woocommerce'),
+                    'type' => 'text',
+                    'description' => __('Please enter back link from PayBox when enduser cancel transaction.', 'woocommerce'),
+                    'default' => '/checkout/order-canceled/'
                 ),
                 'paybox_url' => array(
                     'title' => __('Paybox URL', 'woocommerce'),
@@ -147,26 +159,6 @@ function woocommerce_paybox_init() {
                     'description' => __('Message to the user before redirecting to PayBox.', 'woocommerce'),
                     'default' => __('You will be redirect to Paybox System payment gatway in a few seconds ... Please wait ...', 'woocommerce')
                 ),
-                /*
-                  'os' => array(
-                  'title' => __('Choose your OS', 'woocommerce'),
-                  'type' => 'select',
-                  'label' => __('Choose your OS', 'woothemes'),
-                  'description' => __(''),
-                  'options' => array(
-                  'win' => 'Windows',
-                  'lin' => 'Linux',
-                  'lin64' => 'Linux 64bits',
-                  'unix' => 'Unix',
-                  'deb64' => 'Debian 64bits',
-                  'fed64' => 'Fedora 64bits',
-                  'sunsolaris' => 'Sun solaris',
-                  'linuxcentos' => 'Linux centos',
-                  'freebsd' => 'Free bsd',
-                  'macos' => 'Mac OS',
-                  'ubuntu' => 'Ubuntu',
-                  )
-                  ), */
                 'paybox_exe' => array(
                     'title' => __('Complete path to PayBox CGI', 'woocommerce'),
                     'type' => 'textarea',
@@ -212,9 +204,9 @@ function woocommerce_paybox_init() {
             $param .= ' PBX_CMD=' . $order->paybox_url;
             //$param .= ' PBX_CLE=' . $this->paybox_key;
             $param .= ' PBX_REPONDRE_A=http://' . str_replace('//', '/', $_SERVER['HTTP_HOST'] . '/' . $this->return_url);
-            $param .= ' PBX_EFFECTUE=http://' . str_replace('//', '/', $_SERVER['HTTP_HOST'] . '/' . $this->back_url);
-            $param .= ' PBX_REFUSE=http://' . str_replace('//', '/', $_SERVER['HTTP_HOST'] . '/' . $this->back_url);
-            $param .= ' PBX_ANNULE=http://' . str_replace('//', '/', $_SERVER['HTTP_HOST'] . '/' . $this->back_url);
+            $param .= ' PBX_EFFECTUE=http://' . str_replace('//', '/', $_SERVER['HTTP_HOST'] . '/' . $this->callback_success_url);
+            $param .= ' PBX_REFUSE=http://' . str_replace('//', '/', $_SERVER['HTTP_HOST'] . '/' . $this->callback_refused_url);
+            $param .= ' PBX_ANNULE=http://' . str_replace('//', '/', $_SERVER['HTTP_HOST'] . '/' . $this->callback_cancel_url);
             $param .= ' PBX_DEVISE=978'; // Euro (à paramétriser)
             if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
                 $param .= ' PBX_RETOUR=order:R;erreur:E;carte:C;numauto:A;numtrans:S;numabo:B;montantbanque:M;sign:K';
