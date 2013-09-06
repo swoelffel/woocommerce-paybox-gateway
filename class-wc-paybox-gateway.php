@@ -4,7 +4,7 @@
  * Plugin Name: WooCommerce Paybox Payment Gateway
  * Plugin URI: http://www.castelis.com/woocommerce/
  * Description: Gateway e-commerce pour Paybox.
- * Version: 0.2.2
+ * Version: 0.2.4
  * Author: Castelis
  * Author URI: http://www.castelis.com/
  * License: GPL version 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -73,11 +73,27 @@ function woocommerce_paybox_init() {
             //error_log('thankyou_page');
             // Pour le moment on ne fait rien
         }
+        
+        /*
+         * Admin tools.
+         */        
+	public function admin_options() {
+		?>
+		<h3><?php _e( 'Castelis PayBox Gateway', 'woocommerce' ); ?></h3>
+		<p><?php _e( 'Test text here.', 'woocommerce' ); ?></p>
+                <table class="form-table">
+                <?php
+                // Generate the HTML For the settings form.
+                $this->generate_settings_html();
+                ?>
+                </table><!--/.form-table-->
+		<?php
+	}
+
 
         /*
          * Initialize Gateway Settings Form Fields.
          */
-
         function init_form_fields() {
 
             $this->form_fields = array(
@@ -201,7 +217,6 @@ function woocommerce_paybox_init() {
             $param .= ' PBX_RANG=' . $this->paybox_rang;
             $param .= ' PBX_TOTAL=' . 100 * $order->get_total();
             $param .= ' PBX_CMD=' . $order->id;
-            $param .= ' PBX_CMD=' . $order->paybox_url;
             //$param .= ' PBX_CLE=' . $this->paybox_key;
             $param .= ' PBX_REPONDRE_A=http://' . str_replace('//', '/', $_SERVER['HTTP_HOST'] . '/' . $this->return_url);
             $param .= ' PBX_EFFECTUE=http://' . str_replace('//', '/', $_SERVER['HTTP_HOST'] . '/' . $this->callback_success_url);
@@ -346,28 +361,24 @@ function woocommerce_paybox_check_response() {
                             if ((int) (100 * $order->get_total()) == (int) $_GET['montantbanque']) {
                                 $order->add_order_note('<p style="color:green"><b>Paybox Return OK</b></p><br/>' . $std_msg);
                                 $order->payment_complete();
-                                header('HTTP/1.1 200 OK');
-                                wp_die('OK');
+                                unset( $woocommerce->session->order_awaiting_payment );
+                                wp_die('OK', '', array('response' => 200));                                wp_die('OK');
                             } else {
                                 $order->add_order_note('<p style="color:red"><b>ERROR</b></p> Order Amount<br/>' . $std_msg);
-                                header('HTTP/1.1 406');
-                                wp_die('KO Amount modified : ' . $_GET['montantbanque'] . ' / ' . (100 * $order->get_total()));
+                                wp_die('KO Amount modified : ' . $_GET['montantbanque'] . ' / ' . (100 * $order->get_total()), '', array('response' => 406));
                             }
                         } else {
                             $order->add_order_note('<p style="color:red"><b>ERROR</b></p> Signature Rejected<br/>' . $std_msg);
-                            header('HTTP/1.1 406');
-                            wp_die('KO Signature');
+                            wp_die('KO Signature', '', array('response' => 406));
                         }
                         break;
                     default:
                         $order->add_order_note('<p style="color:red"><b>PBX ERROR ' . $_GET['erreur'] . '</b> ' . WC_Paybox::getErreurMsg($_GET['erreur']) . '</p><br/>' . $std_msg);
-                        header('HTTP/1.1 200 OK');
-                        wp_die('OK received');
+                        wp_die('OK received', '', array('response' => 200));
                         break;
                 }
             } else {
-                header('HTTP/1.1 200 OK');
-                wp_die('Test AutoResponse OK');
+                wp_die('Test AutoResponse OK', '', array('response' => 200));
             }
         }
     }

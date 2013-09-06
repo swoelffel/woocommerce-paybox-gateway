@@ -48,3 +48,7 @@ Solve an issue blocking parameters saving on Payment Gateways back office.
 
 = 0.2.3 =
 Add 2 paybox parameters for callback Cancel or Failed (dedicated URL)
+
+= 0.2.4 =
+Change default response code for autoresponse
+Empty basket on shortcode
