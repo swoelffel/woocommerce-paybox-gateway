@@ -71,7 +71,7 @@ function woocommerce_paybox_init() {
         function thankyou_page($posted) {
             global $woocommerce;
             //error_log('thankyou_page');
-            // Pour le moment on ne fait rien
+            //Pour le moment on ne fait rien
         }
         
         /*
@@ -239,7 +239,7 @@ function woocommerce_paybox_init() {
             $param .= ' PBX_PORTEUR=' . $email_address; //. $order->customer_user;
             $exe = $this->paybox_exe;
             if (file_exists($exe)) {
-                error_log($exe . ' ' . $param);
+                //error_log($exe . ' ' . $param);
                 $retour = shell_exec($exe . ' ' . $param);
                 if ($retour != '') {
                     return $retour;
