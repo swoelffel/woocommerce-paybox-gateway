@@ -1,16 +1,15 @@
 <?php
-
 /**
  * Plugin Name: WooCommerce Paybox Payment Gateway
- * Plugin URI: http://www.castelis.com/woocommerce/
+ * Plugin URI: http://www.oenboutique.fr/
  * Description: Gateway e-commerce pour Paybox.
- * Version: 0.2.4
- * Author: Castelis
- * Author URI: http://www.castelis.com/
+ * Version: 0.3.0
+ * Author: SWO (Open Boutique)
+ * Author URI: http://www.openboutique.fr/
  * License: GPL version 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *
  * @package WordPress
- * @author Castelis
+ * @author SWO (Open Boutique)
  * @since 0.1.0
  */
 add_action('plugins_loaded', 'woocommerce_paybox_init', 0);
@@ -20,7 +19,7 @@ function woocommerce_paybox_init() {
         return;
     };
 
-    DEFINE('PLUGIN_DIR', plugins_url(basename(plugin_dir_path(__FILE__)), basename(__FILE__)) . '/');
+    DEFINE('PLUGIN_DIR', plugins_url(basename(plugin_dir_path(__FILE__)), basename(__FILE__)));
 
     /*
      * Paybox Commerce Gateway Class
@@ -46,19 +45,8 @@ function woocommerce_paybox_init() {
 
             // Ajout des Hooks
             add_action('woocommerce_update_options_payment_gateways', array(&$this, 'process_admin_options'));
-            add_action('woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ));
-            add_action('woocommerce_thankyou_paybox', array(&$this, 'thankyou_page'));
-        }
-
-        /**
-         * Reponse Paybox (Pour le serveur Paybox)
-         *
-         * @access public
-         * @return void
-         */
-        function check_response() {
-            // Code move to woocommerce_paybox_check_response
-            // Instance WC_Paybox not load at init with version 2.0
+            add_action('woocommerce_update_options_payment_gateways_' . $this->id, array($this, 'process_admin_options'));
+            //add_action('woocommerce_thankyou_paybox', array(&$this, 'thankyou_page'));
         }
 
         /**
@@ -67,33 +55,102 @@ function woocommerce_paybox_init() {
          * @access public
          * @param array $posted
          * @return void
+
+          function thankyou_page($posted) {
+          global $woocommerce;
+          //error_log('thankyou_page');
+          //Pour le moment on ne fait rien
+          }
+         *
          */
-        function thankyou_page($posted) {
-            global $woocommerce;
-            //error_log('thankyou_page');
-            //Pour le moment on ne fait rien
-        }
-        
         /*
          * Admin tools.
-         */        
-	public function admin_options() {
-		?>
-		<h3><?php _e( 'Castelis PayBox Gateway', 'woocommerce' ); ?></h3>
-		<p><?php _e( 'Test text here.', 'woocommerce' ); ?></p>
-                <table class="form-table">
+         */
+        public function admin_options() {
+            ?>
+            <h3><?php _e('OpenBoutique PayBox Gateway', 'woocommerce'); ?></h3>
+            <div id="wc-ob-pbx-admin">
+                <div>
+                    <?php
+                    wp_enqueue_style('custom_openboutique_paybox_css', PLUGIN_DIR . '/css/style.css', false, '1.0.0');
+                    wp_enqueue_script('custom_openboutique_paybox_js', PLUGIN_DIR . '/js/script.js', false, '1.0.0');
+                    $install_url = '';
+                    if (!get_option('woocommerce_pbx_order_refused_page_id')) {
+                        $install_url .= '&install_pbx_refused_page=true';
+                    }
+                    if (!get_option('woocommerce_pbx_order_canceled_page_id')) {
+                        $install_url .= '&install_pbx_canceled_page=true';
+                    }
+                    if ($install_url != '' && empty($_GET['install_pbx_refused_page']) && empty($_GET['install_pbx_canceled_page'])) {
+                        ?>
+
+                        <p><?php _e('We have detected that Paybox return pages are not currently installed on your system<br/>Press the install button to prevent 404 from users whom transaction would have been canceled or refused.', 'woocommerce') ?></p>
+                        <p>
+                            <a class="button" target="_self" href="/wp-admin/admin.php?page=woocommerce_settings&tab=payment_gateways&section=WC_Paybox<?php echo($install_url); ?>"><?php _e('Install return pages', 'woocommerce') ?></a>
+                        </p>
+                    <?php } else { ?>
+                        <p><?php _e('Paybox return pages are installed : ', 'woocommerce') ?>
+                            <a target="_self" href="/wp-admin/post.php?post=<?php echo(get_option('woocommerce_pbx_order_canceled_page_id')); ?>&action=edit">canceled</a>&nbsp;|&nbsp;
+                            <a target="_self" href="/wp-admin/post.php?post=<?php echo(get_option('woocommerce_pbx_order_refused_page_id')); ?>&action=edit">refused</a>
+                        </p>
+                    <?php } ?>
+                </div>
+                <div>
+                    <p>Press "send report" button and fill your email in order to post your Paybox Gateway parameters to OpenBoutique support team<br/>
+                    Your email : <input type="text" name="email" value="your email" />
+                        <a class="button-primary" id="ob-paybox_send_report" href="#">Send report</a>
+                    </p>
+                    <iframe name="myOB_iframe" id="myOB_iframe" style="display: none"></iframe>
+                </div>
+            </div>
+
+            <table class="form-table">
                 <?php
                 // Generate the HTML For the settings form.
                 $this->generate_settings_html();
                 ?>
-                </table><!--/.form-table-->
-		<?php
-	}
+            </table><!--/.form-table-->
+            <?php
+            if (!empty($_GET['install_pbx_refused_page'])) {
+                // Page paiement refusé -> A venir short code pour interpretation du code retour
+                $this->create_page(esc_sql(_x('order-refused', 'page_slug', 'woocommerce')), 'woocommerce_pbx_order_refused_page_id', __('Order Refused', 'woocommerce'), '[woocommerce_thankyou]', woocommerce_get_page_id('checkout'));
+            }
+            if (!empty($_GET['install_pbx_canceled_page'])) {
+                // Page paiement annulé par le client
+                $this->create_page(esc_sql(_x('order-canceled', 'page_slug', 'woocommerce')), 'woocommerce_pbx_order_canceled_page_id', __('Order Canceled', 'woocommerce'), '[woocommerce_thankyou]', woocommerce_get_page_id('checkout'));
+            }
+        }
 
+        function create_page($slug, $option, $page_title = '', $page_content = '', $post_parent = 0) {
+            global $wpdb;
+            $option_value = get_option($option);
+            if ($option_value > 0 && get_post($option_value))
+                return;
+
+            $page_found = $wpdb->get_var($wpdb->prepare("SELECT ID FROM " . $wpdb->posts . " WHERE post_name = %s LIMIT 1;", $slug));
+            if ($page_found) {
+                if (!$option_value)
+                    update_option($option, $page_found);
+                return;
+            }
+            $page_data = array(
+                'post_status' => 'publish',
+                'post_type' => 'page',
+                'post_author' => 1,
+                'post_name' => $slug,
+                'post_title' => $page_title,
+                'post_content' => $page_content,
+                'post_parent' => $post_parent,
+                'comment_status' => 'closed'
+            );
+            $page_id = wp_insert_post($page_data);
+            update_option($option, $page_id);
+        }
 
         /*
          * Initialize Gateway Settings Form Fields.
          */
+
         function init_form_fields() {
 
             $this->form_fields = array(
@@ -119,25 +176,19 @@ function woocommerce_paybox_init() {
                     'title' => __('Site ID Paybox', 'woocommerce'),
                     'type' => 'text',
                     'description' => __('Please enter you ID Site provided by PayBox.', 'woocommerce'),
-                    'default' => ''
+                    'default' => '1999888'
                 ),
                 'paybox_identifiant' => array(
                     'title' => __('Paybox ID', 'woocommerce'),
                     'type' => 'text',
                     'description' => __('Please enter you Paybox ID provided by PayBox.', 'woocommerce'),
-                    'default' => ''
+                    'default' => '2'
                 ),
                 'paybox_rang' => array(
                     'title' => __('Paybox Rank', 'woocommerce'),
                     'type' => 'text',
                     'description' => __('Please enter Paybox Rank provided by PayBox.', 'woocommerce'),
-                    'default' => ''
-                ),
-                'paybox_key' => array(
-                    'title' => __('Paybox Key', 'woocommerce'),
-                    'type' => 'text',
-                    'description' => __('Please enter Paybox Key provided by PayBox.', 'woocommerce'),
-                    'default' => ''
+                    'default' => '99'
                 ),
                 'return_url' => array(
                     'title' => __('Paybox return URL', 'woocommerce'),
@@ -148,7 +199,7 @@ function woocommerce_paybox_init() {
                 'callback_success_url' => array(
                     'title' => __('Successful Return Link', 'woocommerce'),
                     'type' => 'text',
-                    'description' => __('Please enter callback link from PayBox when transaction succeed (where you need to put the [im4woo_thankyou] shortcode).', 'woocommerce'),
+                    'description' => __('Please enter callback link from PayBox when transaction succeed (where you need to put the [openboutique_thankyou] shortcode).', 'woocommerce'),
                     'default' => '/checkout/order-received/'
                 ),
                 'callback_refused_url' => array(
@@ -167,7 +218,7 @@ function woocommerce_paybox_init() {
                     'title' => __('Paybox URL', 'woocommerce'),
                     'type' => 'text',
                     'description' => __('Please enter the posting URL for paybox Form <br/>For testing : https://preprod-tpeweb.paybox.com/cgi/MYchoix_pagepaiement.cgi<br/>For production : https://tpeweb.paybox.com/cgi/MYchoix_pagepaiement.cgi', 'woocommerce'),
-                    'default' => 'https://tpeweb.paybox.com/cgi/MYchoix_pagepaiement.cgi'
+                    'default' => 'https://preprod-tpeweb.paybox.com/cgi/MYpagepaiement.cgi'
                 ),
                 'prepost_message' => array(
                     'title' => __('Customer Message', 'woocommerce'),
@@ -201,7 +252,7 @@ function woocommerce_paybox_init() {
                     function launchPaybox() {
                         document.PAYBOX.submit();
                     }
-                    t=setTimeout("launchPaybox()",5000);
+                    t=setTimeout("launchPaybox()",3000);
                 </script>
                 ';
             wp_die($retour);
@@ -217,7 +268,6 @@ function woocommerce_paybox_init() {
             $param .= ' PBX_RANG=' . $this->paybox_rang;
             $param .= ' PBX_TOTAL=' . 100 * $order->get_total();
             $param .= ' PBX_CMD=' . $order->id;
-            //$param .= ' PBX_CLE=' . $this->paybox_key;
             $param .= ' PBX_REPONDRE_A=http://' . str_replace('//', '/', $_SERVER['HTTP_HOST'] . '/' . $this->return_url);
             $param .= ' PBX_EFFECTUE=http://' . str_replace('//', '/', $_SERVER['HTTP_HOST'] . '/' . $this->callback_success_url);
             $param .= ' PBX_REFUSE=http://' . str_replace('//', '/', $_SERVER['HTTP_HOST'] . '/' . $this->callback_refused_url);
@@ -242,6 +292,7 @@ function woocommerce_paybox_init() {
                 //error_log($exe . ' ' . $param);
                 $retour = shell_exec($exe . ' ' . $param);
                 if ($retour != '') {
+                    $retour = str_replace('https://tpeweb.paybox.com/cgi/MYchoix_pagepaiement.cgi', $this->paybox_url, $retour);
                     return $retour;
                 } else {
                     return _('Permissions are not correctly set for file ' . $exe);
@@ -314,9 +365,9 @@ function woocommerce_paybox_init() {
         return $methods;
     }
 
-    include_once('shortcode-im4woo-thankyou.php');
+    include_once('shortcode-openboutique-thankyou.php');
 
-    add_shortcode('im4woo_thankyou', 'get_im4woo_thankyou');
+    add_shortcode('openboutique_thankyou', 'get_openboutique_thankyou');
     add_filter('woocommerce_payment_gateways', 'add_paybox_commerce_gateway');
     add_action('init', 'woocommerce_paybox_check_response');
 }
@@ -361,8 +412,9 @@ function woocommerce_paybox_check_response() {
                             if ((int) (100 * $order->get_total()) == (int) $_GET['montantbanque']) {
                                 $order->add_order_note('<p style="color:green"><b>Paybox Return OK</b></p><br/>' . $std_msg);
                                 $order->payment_complete();
-                                unset( $woocommerce->session->order_awaiting_payment );
-                                wp_die('OK', '', array('response' => 200));                                wp_die('OK');
+                                unset($woocommerce->session->order_awaiting_payment);
+                                wp_die('OK', '', array('response' => 200));
+                                wp_die('OK');
                             } else {
                                 $order->add_order_note('<p style="color:red"><b>ERROR</b></p> Order Amount<br/>' . $std_msg);
                                 wp_die('KO Amount modified : ' . $_GET['montantbanque'] . ' / ' . (100 * $order->get_total()), '', array('response' => 406));
@@ -383,3 +435,4 @@ function woocommerce_paybox_check_response() {
         }
     }
 }
+

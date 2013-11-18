@@ -39,3 +39,8 @@ Nothing to do
 = 0.2.2 = Solve an issue blocking parameters saving on Payment Gateways back office.
 
 = 0.2.3 = Add 2 paybox parameters for callback Cancel or Failed (dedicated URL)
+
+= 0.3.0 =   Solve bug when using Paybox testing parameters
+            Add automatic landing page creation for cancel and refused transactions
+            Add link to send parameters to support servers
+            AutoFill parameters with Paybox testing parameters on first install.

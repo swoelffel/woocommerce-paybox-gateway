@@ -1,13 +1,13 @@
 <?php
 /**
- * Thankyou Shortcode
+ * Thankyou Paybox Shortcode
  *
  * The thankyou page displays after successful checkout and can be hooked into by payment gateways.
  *
- * @author 		WooThemes
+ * @author 	SWO (OpenBoutique)
  * @category 	Shortcodes
- * @package 	WooCommerce/Shortcodes/Thankyou
- * @version     1.6.4
+ * @package 	WordPress
+ * @version     0.3.0
  */
 
 /**
@@ -17,9 +17,9 @@
  * @param array $atts
  * @return string
  */
-function get_im4woo_thankyou( $atts ) {
+function get_openboutique_thankyou( $atts ) {
 	global $woocommerce;
-	return $woocommerce->shortcode_wrapper('im4woo_thankyou', $atts);
+	return $woocommerce->shortcode_wrapper('openboutique_thankyou', $atts);
 }
 
 
@@ -30,7 +30,7 @@ function get_im4woo_thankyou( $atts ) {
  * @param mixed $atts
  * @return void
  */
-function im4woo_thankyou( $atts ) {
+function openboutique_thankyou( $atts ) {
 	global $woocommerce;
 
 	$woocommerce->nocache();
