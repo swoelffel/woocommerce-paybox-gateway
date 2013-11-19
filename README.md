@@ -44,3 +44,5 @@ Nothing to do
             Add automatic landing page creation for cancel and refused transactions
             Add link to send parameters to support servers
             AutoFill parameters with Paybox testing parameters on first install.
+
+= 0.3.2 =   Assets issue

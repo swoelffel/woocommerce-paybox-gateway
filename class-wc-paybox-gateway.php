@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce Paybox Payment Gateway
  * Plugin URI: http://www.openboutique.fr/
  * Description: Gateway e-commerce pour Paybox.
- * Version: 0.3.0
+ * Version: 0.3.2
  * Author: SWO (Open Boutique)
  * Author URI: http://www.openboutique.fr/
  * License: GPL version 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
