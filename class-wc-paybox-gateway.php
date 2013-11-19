@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: WooCommerce Paybox Payment Gateway
- * Plugin URI: http://www.oenboutique.fr/
+ * Plugin URI: http://www.openboutique.fr/
  * Description: Gateway e-commerce pour Paybox.
  * Version: 0.3.0
  * Author: SWO (Open Boutique)
@@ -29,7 +29,7 @@ function woocommerce_paybox_init() {
 
         function __construct() {
             $this->id = 'paybox';
-            $this->icon = PLUGIN_DIR . 'images/paybox.png';
+            $this->icon = PLUGIN_DIR . '/images/paybox.png';
             $this->has_fields = false;
             $this->method_title = __('PayBox', 'woocommerce');
             // Load the form fields
