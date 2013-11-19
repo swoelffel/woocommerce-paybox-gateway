@@ -86,7 +86,7 @@ function woocommerce_paybox_init() {
 
                         <p><?php _e('We have detected that Paybox return pages are not currently installed on your system<br/>Press the install button to prevent 404 from users whom transaction would have been canceled or refused.', 'woocommerce') ?></p>
                         <p>
-                            <a class="button" target="_self" href="/wp-admin/admin.php?page=woocommerce_settings&tab=payment_gateways&section=WC_Paybox<?php echo($install_url); ?>"><?php _e('Install return pages', 'woocommerce') ?></a>
+                            <a class="button" target="_self" href="wp-admin/admin.php?page=woocommerce_settings&tab=payment_gateways&section=WC_Paybox<?php echo($install_url); ?>"><?php _e('Install return pages', 'woocommerce') ?></a>
                         </p>
                     <?php } else { ?>
                         <p><?php _e('Paybox return pages are installed : ', 'woocommerce') ?>
