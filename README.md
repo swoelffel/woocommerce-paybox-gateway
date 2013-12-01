@@ -46,3 +46,8 @@ Nothing to do
             AutoFill parameters with Paybox testing parameters on first install.
 
 = 0.3.2 =   Assets issue
+
+= 0.3.4 =   Restore short-code for received page
+            Improve support form
+            Add automatic creation for Paybox order received page including dedicated shortcode
+            Add a new parameter to allow changing the delay before redirecting to pay box gateway while checkout
