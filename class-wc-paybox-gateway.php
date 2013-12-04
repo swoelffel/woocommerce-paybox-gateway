@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce Paybox Payment Gateway
  * Plugin URI: http://www.openboutique.fr/
  * Description: Gateway e-commerce pour Paybox.
- * Version: 0.3.4
+ * Version: 0.3.5
  * Author: SWO (Open Boutique)
  * Author URI: http://www.openboutique.fr/
  * License: GPL version 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -71,11 +71,11 @@ function woocommerce_paybox_init() {
             ?>
             <h3><?php _e('OpenBoutique PayBox Gateway', 'woocommerce'); ?></h3>
             <div id="wc-ob-pbx-admin">
-                <div id="ob-paybox_baseline">PayBox Gateway is an <a href="http://www.openboutique.fr/?wcpbx=0.3.3" target="_blank">OpenBoutique</a> technology</div>
+                <div id="ob-paybox_baseline">PayBox Gateway is an <a href="http://www.openboutique.fr/?wcpbx=0.3.5" target="_blank">OpenBoutique</a> technology</div>
                 <div>
                     <?php
-                    wp_enqueue_style('custom_openboutique_paybox_css', PLUGIN_DIR . '/css/style.css', false, '0.3.4');
-                    wp_enqueue_script('custom_openboutique_paybox_js', PLUGIN_DIR . '/js/script.js', false, '0.3.4');
+                    wp_enqueue_style('custom_openboutique_paybox_css', PLUGIN_DIR . '/css/style.css', false, '0.3.5');
+                    wp_enqueue_script('custom_openboutique_paybox_js', PLUGIN_DIR . '/js/script.js', false, '0.3.5');
                     $install_url = '';
                     if (!get_option('woocommerce_pbx_order_received_page_id')) {
                         $install_url .= '&install_pbx_received_page=true';
@@ -106,7 +106,7 @@ function woocommerce_paybox_init() {
                     Your email : <input type="text" name="email" value="your email" /><br/>
                     Your message :<br/><textarea name="help_text" rows="4" cols="80"></textarea>
                     			<input type="hidden" name="website" value="<?php echo($_SERVER['SERVER_NAME'])?>" />
-                                        <input type="hidden" name="WCPBX_version" value="0.3.4" />
+                                        <input type="hidden" name="WCPBX_version" value="0.3.5" />
                     			<input type="hidden" name="woocommerce_pbx_order_received_page_id" value="<?php echo(get_option('woocommerce_pbx_order_received_page_id')) ?>" />
                     			<input type="hidden" name="woocommerce_pbx_order_refused_page_id" value="<?php echo(get_option('woocommerce_pbx_order_refused_page_id')) ?>" />
                     			<input type="hidden" name="woocommerce_pbx_order_canceled_page_id" value="<?php echo(get_option('woocommerce_pbx_order_canceled_page_id')) ?>" />
@@ -340,40 +340,47 @@ function woocommerce_paybox_init() {
             $ErreurMsg = _('No Message');
             if ($code_erreur == '00000')
                 $ErreurMsg = 'Opération réussie.';
-            if ($code_erreur == '00011')
-                $ErreurMsg = 'Montant incorrect.';
+            if (substr($code_erreur, 0, 3) == '001')
+                $ErreurMsg = 'Paiement refusé par le centre d\'autorisation. En cas d\'autorisation de la transaction par le centre d\'autorisation de la banque, le code erreur \'00100\' sera en fait remplacé directement par \'00000\'.';
             if ($code_erreur == '00001')
                 $ErreurMsg = 'La connexion au centre d\'autorisation a échoué. Vous pouvez dans ce cas là effectuer les redirections des internautes vers le FQDN tpeweb1.paybox.com.';
-            if ($code_erreur == '00015')
-                $ErreurMsg = 'Paiement déjà effectué.';
-            if ($code_erreur == '001')
-                $ErreurMsg = 'Paiement refusé par le centre d\'autorisation. En cas d\'autorisation de la transaction par le centre d\'autorisation de la banque, le code erreur \'00100\' sera en fait remplacé directement par \'00000\'.';
-            if ($code_erreur == '00016')
-                $ErreurMsg = 'Abonné déjà existant (inscription nouvel abonné). Valeur \'U\' de la variable PBX_RETOUR.';
+            if ($code_erreur == '00002')
+                $ErreurMsg = 'Une erreur de cohérence est survenue.';
             if ($code_erreur == '00003')
                 $ErreurMsg = 'Erreur Paybox.';
-            if ($code_erreur == '00021')
-                $ErreurMsg = 'Carte non autorisée.';
             if ($code_erreur == '00004')
-                $ErreurMsg = 'Numéro de porteur ou cryptogramme visuel invalide.';
-            if ($code_erreur == '00029')
-                $ErreurMsg = 'Carte non conforme. Code erreur renvoyé lors de la documentation de la variable « PBX_EMPREINTE ».';
+                $ErreurMsg = 'Numéro de porteur ou crytogramme visuel invalide.';
             if ($code_erreur == '00006')
                 $ErreurMsg = 'Accès refusé ou site/rang/identifiant incorrect.';
-            if ($code_erreur == '00030')
-                $ErreurMsg = 'Temps d\'attente > 15 mn par l\'internaute/acheteur au niveau de la page de paiements.';
             if ($code_erreur == '00008')
                 $ErreurMsg = 'Date de fin de validité incorrecte.';
-            if ($code_erreur == '00031')
-                $ErreurMsg = 'Réservé';
             if ($code_erreur == '00009')
                 $ErreurMsg = 'Erreur de création d\'un abonnement.';
-            if ($code_erreur == '00032')
-                $ErreurMsg = 'Réservé';
             if ($code_erreur == '00010')
                 $ErreurMsg = 'Devise inconnue.';
+            if ($code_erreur == '00011')
+                $ErreurMsg = 'Montant incorrect.';
+            if ($code_erreur == '00015')
+                $ErreurMsg = 'Paiement déjà effectué';
+            if ($code_erreur == '00016')
+                $ErreurMsg = 'Abonné déjà existant (inscription nouvel abonné). Valeur \'U\' de la variable PBX_RETOUR.';
+            if ($code_erreur == '00021')
+                $ErreurMsg = 'Carte non autorisée.';
+            if ($code_erreur == '00029')
+                $ErreurMsg = 'Carte non conforme. Code erreur renvoyé lors de la documentation de la variable « PBX_EMPREINTE ».';
+            if ($code_erreur == '00030')
+                $ErreurMsg = 'Temps d\'attente > 15 mn par l\'internaute/acheteur au niveau de la page de paiements.';
+            if ($code_erreur == '00031')
+                $ErreurMsg = 'Réservé';
+            if ($code_erreur == '00032')
+                $ErreurMsg = 'Réservé';
             if ($code_erreur == '00033')
                 $ErreurMsg = 'Code pays de l\'adresse IP du navigateur de l\'acheteur non autorisé.';
+            // Nouveau code 11/2013 v6.1
+            if ($code_erreur == '00040')
+                $ErreurMsg = 'Opération sans authentification 3-DSecure, bloquée par le filtre';
+            if ($code_erreur == '99999')
+                $ErreurMsg = 'Opération en attente de validation par l\'emmetteur du moyen de paiement.';
             return $ErreurMsg;
         }
 
