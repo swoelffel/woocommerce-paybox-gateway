@@ -51,3 +51,5 @@ Nothing to do
             Improve support form
             Add automatic creation for Paybox order received page including dedicated shortcode
             Add a new parameter to allow changing the delay before redirecting to pay box gateway while checkout
+
+= 0.3.5 =   Mise à jour pour tenir compte de la documentation http://www1.paybox.com/telechargements/ManuelIntegrationPayboxSystem_V6.1_FR.pdf du 27/11/2013
