@@ -53,3 +53,5 @@ Nothing to do
             Add a new parameter to allow changing the delay before redirecting to pay box gateway while checkout
 
 = 0.3.5 =   Mise à jour pour tenir compte de la documentation http://www1.paybox.com/telechargements/ManuelIntegrationPayboxSystem_V6.1_FR.pdf du 27/11/2013
+
+= 0.3.6 =   Issue correction while redirection timeout is not set / 3000 ms by default
