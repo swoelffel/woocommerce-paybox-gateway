@@ -17,17 +17,21 @@
 
 	function woocommerce_paybox_init()
 	{
-		if (!class_exists('WC_Payment_Gateway')) 
+		if (!class_exists('WC_Payment_Gateway'))
 			return;
 
 		DEFINE('PLUGIN_DIR', plugins_url(basename(plugin_dir_path(__FILE__)), basename(__FILE__)));
 		DEFINE('VERSION', '0.3.6');
+		DEFINE('THANKS_SHORTCODE', 'openboutique_thankyou');
+		
+		// Ajout des traductions
+		load_plugin_textdomain('openboutique_paybox_gateway', false, dirname(plugin_basename(__FILE__)).'/lang/');
 
 		/*
 		 * Paybox Commerce Gateway Class
 		 */
 
-		class WC_Paybox extends WC_Payment_Gateway 
+		class WC_Paybox extends WC_Payment_Gateway
 		{
 			function __construct()
 			{
@@ -49,8 +53,6 @@
 				// Ajout des Hooks
 				add_action('woocommerce_update_options_payment_gateways', array(&$this, 'process_admin_options'));
 				add_action('woocommerce_update_options_payment_gateways_' . $this->id, array($this, 'process_admin_options'));
-				// Ajout des traductions
-				load_plugin_textdomain('openboutique_paybox_gateway', false, dirname(plugin_basename(__FILE__)).'/lang/');
 			}
 
 			/*
@@ -77,22 +79,22 @@
 				if (!get_option('woocommerce_pbx_order_canceled_page_id')) {
 					$install_url .= '&install_pbx_canceled_page=true';
 				}
-				if ($install_url != '' && empty($_GET['install_pbx_received_page']) && empty($_GET['install_pbx_refused_page']) && empty($_GET['install_pbx_canceled_page']))
+				if ($install_url != '' && !isset($_GET['install_pbx_received_page']) && !isset($_GET['install_pbx_refused_page']) && !isset($_GET['install_pbx_canceled_page']))
 				{
 					echo 
 						'<p>'.
-							__('We have detected that Paybox return pages are not currently installed on your system<br/>Press the install button to prevent 404 from users whom transaction would have been received, canceled or refused.', 'openboutique_paybox_gateway').
+							__('We have detected that Paybox return pages are not currently installed on your system', 'openboutique_paybox_gateway').'<br/>'.__('Press the install button to prevent 404 from users whom transaction would have been received, canceled or refused.', 'openboutique_paybox_gateway').
 						'</p>
 						<p>
-							<a class="button" target="_self" href="/wp-admin/admin.php?page=woocommerce_settings&tab=payment_gateways&section=WC_Paybox'.$install_url.'">'.__('Install return pages', 'openboutique_paybox_gateway').'</a>
+							<a class="button" target="_self" href="./admin.php?page=woocommerce_settings&tab=payment_gateways&section=WC_Paybox'.$install_url.'">'.__('Install return pages', 'openboutique_paybox_gateway').'</a>
 						</p>';
 				} else { 
 					echo
 						'<p>'.
-							__('Paybox return pages are installed', 'woocommerce').' : 
-							<a target="_self" href="/wp-admin/post.php?post='.get_option('woocommerce_pbx_order_received_page_id').'&action=edit">'.__('received', 'openboutique_paybox_gateway').'</a> | 
-							<a target="_self" href="/wp-admin/post.php?post='.get_option('woocommerce_pbx_order_canceled_page_id').'&action=edit">'.__('canceled', 'openboutique_paybox_gateway').'</a> | 
-							<a target="_self" href="/wp-admin/post.php?post='.get_option('woocommerce_pbx_order_refused_page_id').'&action=edit">'.__('refused', 'openboutique_paybox_gateway').'</a>
+							__('Paybox return pages are installed', 'openboutique_paybox_gateway').' : 
+							<a target="_self" href="./post.php?post='.get_option('woocommerce_pbx_order_received_page_id').'&action=edit">'.__('received', 'openboutique_paybox_gateway').'</a> | 
+							<a target="_self" href="./post.php?post='.get_option('woocommerce_pbx_order_canceled_page_id').'&action=edit">'.__('canceled', 'openboutique_paybox_gateway').'</a> | 
+							<a target="_self" href="./post.php?post='.get_option('woocommerce_pbx_order_refused_page_id').'&action=edit">'.__('refused', 'openboutique_paybox_gateway').'</a>
 						</p>';
 				}
 				echo '
@@ -106,15 +108,15 @@
 						</div>
 						<div id="ob-paybox_help_div">
 							<p>
-								'.__('Press "'.__('Send report', 'openboutique_paybox_gateway').'" button and fill your email in order to post your', 'openboutique_paybox_gateway').' <b>'.__('Paybox Gateway parameters', 'openboutique_paybox_gateway').'</b> '.__('to OpenBoutique support team', 'openboutique_paybox_gateway').'<br/>
-								'.__('Your email', 'openboutique_paybox_gateway').' : <input type="text" name="email" value="your email" /><br/>
+								'.__('Press', 'openboutique_paybox_gateway').' "'.__('Send report', 'openboutique_paybox_gateway').'" '.__('button and fill your email in order to post your', 'openboutique_paybox_gateway').' <b>'.__('Paybox Gateway parameters', 'openboutique_paybox_gateway').'</b> '.__('to OpenBoutique support team', 'openboutique_paybox_gateway').'<br/>
+								'.__('Your email', 'openboutique_paybox_gateway').' : <input type="text" name="email" placeholder="'.__('Your email', 'openboutique_paybox_gateway').'" /><br/>
 								'.__('Your message', 'openboutique_paybox_gateway').' :<br/><textarea name="help_text" rows="4" cols="80"></textarea>
 								<input type="hidden" name="website" value="'.$_SERVER['SERVER_NAME'].'" />
 								<input type="hidden" name="WCPBX_version" value="'.VERSION.'" />
 								<input type="hidden" name="woocommerce_pbx_order_received_page_id" value="'.get_option('woocommerce_pbx_order_received_page_id').'" />
 								<input type="hidden" name="woocommerce_pbx_order_refused_page_id" value="'.get_option('woocommerce_pbx_order_refused_page_id').'" />
 								<input type="hidden" name="woocommerce_pbx_order_canceled_page_id" value="'.get_option('woocommerce_pbx_order_canceled_page_id').'" />
-								<a class="button" id="ob-paybox_send_report" href="#">'.__('Send report', 'openboutique_paybox_gateway').'</a>
+								<br/><a class="button" id="ob-paybox_send_report" href="#">'.__('Send report', 'openboutique_paybox_gateway').'</a>
 							</p>
 							<iframe name="myOB_iframe" id="myOB_iframe" style="display: none"></iframe>
 						</div>
@@ -125,15 +127,15 @@
 
 				if (!empty($_GET['install_pbx_received_page'])) {
 					// Page paiement refusé -> A venir short code pour interpretation du code retour
-					$this->create_page(esc_sql(_x('order-pbx-received', 'page_slug', 'woocommerce')), 'woocommerce_pbx_order_received_page_id', __('Order PBX Received', 'openboutique_paybox_gateway'), '[openboutique_thankyou]', woocommerce_get_page_id('checkout'));
+					$this->create_page(esc_sql('order-pbx-received'), 'woocommerce_pbx_order_received_page_id', __('Order PBX Received', 'openboutique_paybox_gateway'), '['.THANKS_SHORTCODE.']', woocommerce_get_page_id('checkout'));
 				}
 				if (!empty($_GET['install_pbx_refused_page'])) {
 					// Page paiement refusé -> A venir short code pour interpretation du code retour
-					$this->create_page(esc_sql(_x('order-pbx-refused', 'page_slug', 'woocommerce')), 'woocommerce_pbx_order_refused_page_id', __('Order PBX Refused', 'openboutique_paybox_gateway'), __('Your order has been refused', 'openboutique_paybox_gateway'), woocommerce_get_page_id('checkout'));
+					$this->create_page(esc_sql('order-pbx-refused'), 'woocommerce_pbx_order_refused_page_id', __('Order PBX Refused', 'openboutique_paybox_gateway'), __('Your order has been refused', 'openboutique_paybox_gateway'), woocommerce_get_page_id('checkout'));
 				}
 				if (!empty($_GET['install_pbx_canceled_page'])) {
 					// Page paiement annulé par le client
-					$this->create_page(esc_sql(_x('order-pbx-canceled', 'page_slug', 'woocommerce')), 'woocommerce_pbx_order_canceled_page_id', __('Order PBX Canceled', 'openboutique_paybox_gateway'), __('Your order has been cancelled', 'openboutique_paybox_gateway'), woocommerce_get_page_id('checkout'));
+					$this->create_page(esc_sql('order-pbx-canceled'), 'woocommerce_pbx_order_canceled_page_id', __('Order PBX Canceled', 'openboutique_paybox_gateway'), __('Your order has been cancelled', 'openboutique_paybox_gateway'), woocommerce_get_page_id('checkout'));
 				}
 			}
 
@@ -202,7 +204,7 @@
 						'default' => '2'
 					),
 					'paybox_rang' => array(
-						'title' => __('Paybox Rank', 'woocommerce'),
+						'title' => __('Paybox Rank', 'openboutique_paybox_gateway'),
 						'type' => 'text',
 						'description' => __('Please enter Paybox Rank provided by PayBox.', 'openboutique_paybox_gateway'),
 						'default' => '99'
@@ -222,7 +224,7 @@
 					'callback_success_url' => array(
 						'title' => __('Successful Return Link', 'openboutique_paybox_gateway'),
 						'type' => 'text',
-						'description' => __('Please enter callback link from PayBox when transaction succeed (where you need to put the [openboutique_thankyou] shortcode).', 'openboutique_paybox_gateway'),
+						'description' => __('Please enter callback link from PayBox when transaction succeed', 'openboutique_paybox_gateway').' ('.__('where you need to put the', 'openboutique_paybox_gateway').' ['.THANKS_SHORTCODE.']'.__('shortcode', 'openboutique_paybox_gateway').')',
 						'default' => '/checkout/order-pbx-received/'
 					),
 					'callback_refused_url' => array(
@@ -359,7 +361,7 @@
 						$erreur_msg = __('Opération réussie.', 'openboutique_paybox_gateway');
 						break;
 					case '00001':
-						$erreur_msg = __('La connexion au centre d\'autorisation a échoué. Vous pouvez dans ce cas là effectuer les redirections des internautes vers le FQDN tpeweb1.paybox.com.', 'openboutique_paybox_gateway');
+						$erreur_msg = __('La connexion au centre d\'autorisation a échoué. Vous pouvez dans ce cas là effectuer les redirections des internautes vers le FQDN', 'openboutique_paybox_gateway').' tpeweb1.paybox.com.';
 						break;
 					case '00002':
 						$erreur_msg = __('Une erreur de cohérence est survenue.', 'openboutique_paybox_gateway');
@@ -436,7 +438,7 @@
 
 		include_once('shortcode-openboutique-thankyou.php');
 
-		add_shortcode('openboutique_thankyou', 'get_openboutique_thankyou');
+		add_shortcode(THANKS_SHORTCODE, 'get_openboutique_thankyou');
 		add_filter('woocommerce_payment_gateways', 'add_paybox_commerce_gateway');
 		add_action('init', 'woocommerce_paybox_check_response');
 	}
@@ -462,7 +464,7 @@
 			$my_WC_Paybox = new WC_Paybox();
 			if (str_replace('//', '/', '/' . $return_url) == str_replace('//', '/', $my_WC_Paybox->return_url))
 			{
-				$std_msg = __('Paybox Return IP:', 'openboutique_paybox_gateway') . WC_Paybox::getRealIpAddr() . '<br/>' . $data . '<br/><div style="word-wrap:break-word;">'.__('PBX Sign', 'openboutique_paybox_gateway').' : '. $sign . '<div>';
+				$std_msg = __('Paybox Return IP', 'openboutique_paybox_gateway').' : '.WC_Paybox::getRealIpAddr().'<br/>'.$data.'<br/><div style="word-wrap:break-word;">'.__('PBX Sign', 'openboutique_paybox_gateway').' : '. $sign . '<div>';
 				@ob_clean();
 				// Traitement du retour PayBox
 				// PBX_RETOUR=order:R;erreur:E;carte:C;numauto:A;numtrans:S;numabo:B;montantbanque:M;sign:K
