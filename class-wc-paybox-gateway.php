@@ -21,7 +21,7 @@
 			return;
 
 		DEFINE('PLUGIN_DIR', plugins_url(basename(plugin_dir_path(__FILE__)), basename(__FILE__)));
-		DEFINE('VERSION', '0.3.5');
+		DEFINE('VERSION', '0.3.6');
 
 		/*
 		 * Paybox Commerce Gateway Class
