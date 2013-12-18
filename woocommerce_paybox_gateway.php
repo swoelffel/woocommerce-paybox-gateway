@@ -37,19 +37,19 @@
 	{
 		if( class_exists('WC_Payment_Gateway') )
 		{
-			include_once( plugin_dir_path( __FILE__ ).'class_paybox.php' );
-			include_once( plugin_dir_path( __FILE__ ).'shortcode-openboutique-thankyou.php' );
+			include_once( plugin_dir_path( __FILE__ ).'woocommerce_paybox_gateway.class.php' );
+			include_once( plugin_dir_path( __FILE__ ).'shortcode_woocommerce_paybox_gateway_thanks.php' );
 		} else
 			exit;
 
 		DEFINE('PLUGIN_DIR', plugins_url(basename(plugin_dir_path(__FILE__)), basename(__FILE__)));
 		DEFINE('VERSION', '0.3.6');
-		DEFINE('THANKS_SHORTCODE', 'openboutique_thankyou');
+		DEFINE('THANKS_SHORTCODE', 'woocommerce_paybox_gateway_thanks');
 
 		// Chargement des traductions
 		load_plugin_textdomain('openboutique_paybox_gateway', false, dirname(plugin_basename(__FILE__)).'/lang/');
 
-		add_shortcode(THANKS_SHORTCODE, 'get_openboutique_thankyou');
+		add_shortcode(THANKS_SHORTCODE, 'get_shortcode_woocommerce_paybox_gateway_thanks');
 		add_filter('woocommerce_payment_gateways', 'add_paybox_commerce_gateway');
 		add_action('init', 'woocommerce_paybox_check_response');
 	}

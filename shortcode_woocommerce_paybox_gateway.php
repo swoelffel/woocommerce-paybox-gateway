@@ -17,10 +17,10 @@
 	 * @param array $atts
 	 * @return string
 	 */
-	function get_openboutique_thankyou( $atts )
+	function get_shortcode_woocommerce_paybox_gateway_thanks( $atts )
 	{
 		global $woocommerce;
-		return $woocommerce->shortcode_wrapper('openboutique_thankyou', $atts);
+		return $woocommerce->shortcode_wrapper('woocommerce_paybox_gateway_thanks', $atts);
 	}
 
 	/**
@@ -30,13 +30,12 @@
 	 * @param mixed $atts
 	 * @return void
 	 */
-	function openboutique_thankyou( $atts )
+	function woocommerce_paybox_gateway_thanks( $atts )
 	{
 		global $woocommerce;
 
 		$woocommerce->nocache();
 		$woocommerce->show_messages();
-		$order = false;
 
 		// Pay for order after checkout step
 		if (isset($_GET['order'])) 
@@ -50,6 +49,8 @@
 
 		if ($order_id > 0)
 			$order = new WC_Order( $order_id );
+		else
+			$order = false;
 
 		woocommerce_get_template( 'checkout/thankyou.php', array( 'order' => $order ) );
 	}
