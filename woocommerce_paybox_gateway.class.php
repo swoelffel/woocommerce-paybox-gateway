@@ -42,13 +42,13 @@
 			wp_enqueue_style('custom_openboutique_paybox_css', PLUGIN_DIR . '/css/style.css', false, VERSION);
 			wp_enqueue_script('custom_openboutique_paybox_js', PLUGIN_DIR . '/js/script.js', false, VERSION);
 			$install_url = '';
-			if (!get_option('woocommerce_pbx_order_received_page_id')) {
+			if (!get_option('woocommerce_pbx_order_received_page_id') || !get_page(get_option('woocommerce_pbx_order_received_page_id'))) {
 				$install_url .= '&install_pbx_received_page=true';
 			}
-			if (!get_option('woocommerce_pbx_order_refused_page_id')) {
+			if (!get_option('woocommerce_pbx_order_refused_page_id') || !get_page(get_option('woocommerce_pbx_order_refused_page_id'))) {
 				$install_url .= '&install_pbx_refused_page=true';
 			}
-			if (!get_option('woocommerce_pbx_order_canceled_page_id')) {
+			if (!get_option('woocommerce_pbx_order_canceled_page_id') || !get_page(get_option('woocommerce_pbx_order_canceled_page_id'))) {
 				$install_url .= '&install_pbx_canceled_page=true';
 			}
 			if ($install_url != '' && !isset($_GET['install_pbx_received_page']) && !isset($_GET['install_pbx_refused_page']) && !isset($_GET['install_pbx_canceled_page']))
