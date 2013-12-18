@@ -38,7 +38,7 @@
 		if( class_exists('WC_Payment_Gateway') )
 		{
 			include_once( plugin_dir_path( __FILE__ ).'woocommerce_paybox_gateway.class.php' );
-			include_once( plugin_dir_path( __FILE__ ).'shortcode_woocommerce_paybox_gateway_thanks.php' );
+			include_once( plugin_dir_path( __FILE__ ).'shortcode_woocommerce_paybox_gateway.php' );
 		} else
 			exit;
 
