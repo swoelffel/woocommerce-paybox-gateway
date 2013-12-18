@@ -1,0 +1,485 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Paybox Payment Gateway v0.3.6\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-12-18 11:19:00+0000\n"
+"Last-Translator: ladoire <jladoire@castelis.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: woocommerce_paybox_gateway.class.php:36
+#@ openboutique_paybox_gateway
+msgid "OpenBoutique PayBox Gateway"
+msgstr "OpenBoutique PayBox Gateway"
+
+#: woocommerce_paybox_gateway.class.php:39
+#@ openboutique_paybox_gateway
+msgid "PayBox Gateway is an"
+msgstr "PayBox Gateway is an"
+
+#: woocommerce_paybox_gateway.class.php:39
+#@ openboutique_paybox_gateway
+msgid "technology"
+msgstr "technology"
+
+#: woocommerce_paybox_gateway.class.php:56
+#@ openboutique_paybox_gateway
+msgid "We have detected that Paybox return pages are not currently installed on your system"
+msgstr "We have detected that Paybox return pages are not currently installed on your system"
+
+#: woocommerce_paybox_gateway.class.php:56
+#@ openboutique_paybox_gateway
+msgid "Press the install button to prevent 404 from users whom transaction would have been received, canceled or refused."
+msgstr "Press the install button to prevent 404 from users whom transaction would have been received, canceled or refused."
+
+#: woocommerce_paybox_gateway.class.php:59
+#@ openboutique_paybox_gateway
+msgid "Install return pages"
+msgstr "Install return pages"
+
+#: woocommerce_paybox_gateway.class.php:64
+#@ openboutique_paybox_gateway
+msgid "Paybox return pages are installed"
+msgstr "Paybox return pages are installed"
+
+#: woocommerce_paybox_gateway.class.php:65
+#@ openboutique_paybox_gateway
+msgid "received"
+msgstr "received"
+
+#: woocommerce_paybox_gateway.class.php:66
+#@ openboutique_paybox_gateway
+msgid "canceled"
+msgstr "canceled"
+
+#: woocommerce_paybox_gateway.class.php:67
+#@ openboutique_paybox_gateway
+msgid "refused"
+msgstr "refused"
+
+#: woocommerce_paybox_gateway.class.php:75
+#@ openboutique_paybox_gateway
+msgid "Need help ?"
+msgstr "Need help ?"
+
+#: woocommerce_paybox_gateway.class.php:81
+#@ openboutique_paybox_gateway
+msgid "Press"
+msgstr "Press"
+
+#: woocommerce_paybox_gateway.class.php:81
+#: woocommerce_paybox_gateway.class.php:89
+#@ openboutique_paybox_gateway
+msgid "Send report"
+msgstr "Send report"
+
+#: woocommerce_paybox_gateway.class.php:81
+#@ openboutique_paybox_gateway
+msgid "button and fill your email in order to post your"
+msgstr "button and fill your email in order to post your"
+
+#: woocommerce_paybox_gateway.class.php:81
+#@ openboutique_paybox_gateway
+msgid "Paybox Gateway parameters"
+msgstr "Paybox Gateway parameters"
+
+#: woocommerce_paybox_gateway.class.php:81
+#@ openboutique_paybox_gateway
+msgid "to OpenBoutique support team"
+msgstr "to OpenBoutique support team"
+
+#: woocommerce_paybox_gateway.class.php:82
+#@ openboutique_paybox_gateway
+msgid "Your email"
+msgstr "Your email"
+
+#: woocommerce_paybox_gateway.class.php:83
+#@ openboutique_paybox_gateway
+msgid "Your message"
+msgstr "Your message"
+
+#: woocommerce_paybox_gateway.class.php:100
+#@ openboutique_paybox_gateway
+msgid "Order PBX Received"
+msgstr "Order Received"
+
+#: woocommerce_paybox_gateway.class.php:103
+#@ openboutique_paybox_gateway
+msgid "Order PBX Refused"
+msgstr "Order Refused"
+
+#: woocommerce_paybox_gateway.class.php:103
+#@ openboutique_paybox_gateway
+msgid "Your order has been refused"
+msgstr "Your order has been refused"
+
+#: woocommerce_paybox_gateway.class.php:106
+#@ openboutique_paybox_gateway
+msgid "Order PBX Canceled"
+msgstr "Order Canceled"
+
+#: woocommerce_paybox_gateway.class.php:106
+#@ openboutique_paybox_gateway
+msgid "Your order has been cancelled"
+msgstr "Your order has been cancelled"
+
+#: woocommerce_paybox_gateway.class.php:144
+#@ openboutique_paybox_gateway
+msgid "Enable/Disable"
+msgstr "Enable/Disable"
+
+#: woocommerce_paybox_gateway.class.php:146
+#@ openboutique_paybox_gateway
+msgid "Enable Paybox Payment"
+msgstr "Enable Paybox Payment"
+
+#: woocommerce_paybox_gateway.class.php:150
+#@ openboutique_paybox_gateway
+msgid "Title"
+msgstr "Title"
+
+#: woocommerce_paybox_gateway.class.php:152
+#@ openboutique_paybox_gateway
+msgid "This controls the title which the user sees during checkout."
+msgstr "This controls the title which the user sees during checkout."
+
+#: woocommerce_paybox_gateway.class.php:153
+#@ openboutique_paybox_gateway
+msgid "Paybox Payment"
+msgstr "Paybox Payment"
+
+#: woocommerce_paybox_gateway.class.php:156
+#: woocommerce_paybox_gateway.class.php:216
+#@ openboutique_paybox_gateway
+msgid "Customer Message"
+msgstr "Customer Message"
+
+#: woocommerce_paybox_gateway.class.php:158
+#@ openboutique_paybox_gateway
+msgid "Let the customer know the payee and where they should be sending the Paybox to and that their order won't be shipping until you receive it."
+msgstr "Let the customer know the payee and where they should be sending the Paybox to and that their order won't be shipping until you receive it."
+
+#: woocommerce_paybox_gateway.class.php:159
+#@ openboutique_paybox_gateway
+msgid "Credit card payment by PayBox."
+msgstr "Credit card payment by PayBox."
+
+#: woocommerce_paybox_gateway.class.php:162
+#@ openboutique_paybox_gateway
+msgid "Site ID Paybox"
+msgstr "Site ID Paybox"
+
+#: woocommerce_paybox_gateway.class.php:164
+#@ openboutique_paybox_gateway
+msgid "Please enter you ID Site provided by PayBox."
+msgstr "Please enter you ID Site provided by PayBox."
+
+#: woocommerce_paybox_gateway.class.php:168
+#@ openboutique_paybox_gateway
+msgid "Paybox ID"
+msgstr "Paybox ID"
+
+#: woocommerce_paybox_gateway.class.php:170
+#@ openboutique_paybox_gateway
+msgid "Please enter you Paybox ID provided by PayBox."
+msgstr "Please enter you Paybox ID provided by PayBox."
+
+#: woocommerce_paybox_gateway.class.php:174
+#@ openboutique_paybox_gateway
+msgid "Paybox Rank"
+msgstr "Paybox Rank"
+
+#: woocommerce_paybox_gateway.class.php:176
+#@ openboutique_paybox_gateway
+msgid "Please enter Paybox Rank provided by PayBox."
+msgstr "Please enter Paybox Rank provided by PayBox."
+
+#: woocommerce_paybox_gateway.class.php:180
+#@ openboutique_paybox_gateway
+msgid "Paybox Checkout waiting time"
+msgstr "Paybox Checkout waiting time"
+
+#: woocommerce_paybox_gateway.class.php:182
+#@ openboutique_paybox_gateway
+msgid "Time to wait before to redirect to Paybox gateway (in milliseconds)."
+msgstr "Time to wait before to redirect to Paybox gateway (in milliseconds)."
+
+#: woocommerce_paybox_gateway.class.php:186
+#@ openboutique_paybox_gateway
+msgid "Paybox return URL"
+msgstr "Paybox return URL"
+
+#: woocommerce_paybox_gateway.class.php:188
+#@ openboutique_paybox_gateway
+msgid "Please enter the autoreponse URL for PayBox."
+msgstr "Please enter the autoreponse URL for PayBox."
+
+#: woocommerce_paybox_gateway.class.php:192
+#@ openboutique_paybox_gateway
+msgid "Successful Return Link"
+msgstr "Successful Return Link"
+
+#: woocommerce_paybox_gateway.class.php:194
+#@ openboutique_paybox_gateway
+msgid "Please enter callback link from PayBox when transaction succeed"
+msgstr "Please enter callback link from PayBox when transaction succeed"
+
+#: woocommerce_paybox_gateway.class.php:194
+#@ openboutique_paybox_gateway
+msgid "where you need to put the"
+msgstr "where you need to put the"
+
+#: woocommerce_paybox_gateway.class.php:194
+#@ openboutique_paybox_gateway
+msgid "shortcode"
+msgstr "shortcode"
+
+#: woocommerce_paybox_gateway.class.php:198
+#@ openboutique_paybox_gateway
+msgid "Failed Return Link"
+msgstr "Failed Return Link"
+
+#: woocommerce_paybox_gateway.class.php:200
+#@ openboutique_paybox_gateway
+msgid "Please enter callback link from PayBox when transaction is refused by gateway."
+msgstr "Please enter callback link from PayBox when transaction is refused by gateway."
+
+#: woocommerce_paybox_gateway.class.php:204
+#@ openboutique_paybox_gateway
+msgid "Cancel Return Link"
+msgstr "Cancel Return Link"
+
+#: woocommerce_paybox_gateway.class.php:206
+#@ openboutique_paybox_gateway
+msgid "Please enter back link from PayBox when enduser cancel transaction."
+msgstr "Please enter back link from PayBox when enduser cancel transaction."
+
+#: woocommerce_paybox_gateway.class.php:210
+#@ openboutique_paybox_gateway
+msgid "Paybox URL"
+msgstr "Paybox URL"
+
+#: woocommerce_paybox_gateway.class.php:212
+#@ openboutique_paybox_gateway
+msgid "Please enter the posting URL for paybox Form"
+msgstr "Please enter the posting URL for paybox Form"
+
+#: woocommerce_paybox_gateway.class.php:212
+#@ openboutique_paybox_gateway
+msgid "For testing"
+msgstr "For testing"
+
+#: woocommerce_paybox_gateway.class.php:212
+#@ openboutique_paybox_gateway
+msgid "For production"
+msgstr "For production"
+
+#: woocommerce_paybox_gateway.class.php:218
+#@ openboutique_paybox_gateway
+msgid "Message to the user before redirecting to PayBox."
+msgstr "Message to the user before redirecting to PayBox."
+
+#: woocommerce_paybox_gateway.class.php:219
+#@ openboutique_paybox_gateway
+msgid "You will be redirect to Paybox System payment gatway in a few seconds ... Please wait ..."
+msgstr "You will be redirect to Paybox System payment gatway in a few seconds ... Please wait ..."
+
+#: woocommerce_paybox_gateway.class.php:222
+#@ openboutique_paybox_gateway
+msgid "Complete path to PayBox CGI"
+msgstr "Complete path to PayBox CGI"
+
+#: woocommerce_paybox_gateway.class.php:224
+#@ openboutique_paybox_gateway
+msgid "Location for Paybox executable"
+msgstr "Location for Paybox executable"
+
+#: woocommerce_paybox_gateway.class.php:328
+#@ openboutique_paybox_gateway
+msgid "Opération réussie."
+msgstr "Operation successfull."
+
+#: woocommerce_paybox_gateway.class.php:331
+#@ openboutique_paybox_gateway
+msgid "La connexion au centre d'autorisation a échoué. Vous pouvez dans ce cas là effectuer les redirections des internautes vers le FQDN"
+msgstr "The connection to the authorization center failed. You can in this case redirect users to the FQDN"
+
+#: woocommerce_paybox_gateway.class.php:334
+#@ openboutique_paybox_gateway
+msgid "Une erreur de cohérence est survenue."
+msgstr "A consistency error has occurred."
+
+#: woocommerce_paybox_gateway.class.php:337
+#@ openboutique_paybox_gateway
+msgid "Erreur Paybox."
+msgstr "Paybox error."
+
+#: woocommerce_paybox_gateway.class.php:340
+#@ openboutique_paybox_gateway
+msgid "Numéro de porteur ou crytogramme visuel invalide."
+msgstr "Bearer number or CVV incorrect"
+
+#: woocommerce_paybox_gateway.class.php:343
+#@ openboutique_paybox_gateway
+msgid "Accès refusé ou site/rang/identifiant incorrect."
+msgstr "Access denied or website / rank /  id incorrect."
+
+#: woocommerce_paybox_gateway.class.php:346
+#@ openboutique_paybox_gateway
+msgid "Date de fin de validité incorrecte."
+msgstr "Incorrect end validity date."
+
+#: woocommerce_paybox_gateway.class.php:349
+#@ openboutique_paybox_gateway
+msgid "Erreur de création d'un abonnement."
+msgstr "Error creating a subscription."
+
+#: woocommerce_paybox_gateway.class.php:352
+#@ openboutique_paybox_gateway
+msgid "Devise inconnue."
+msgstr "Unknown currency."
+
+#: woocommerce_paybox_gateway.class.php:355
+#@ openboutique_paybox_gateway
+msgid "Montant incorrect."
+msgstr "Incorrect amount."
+
+#: woocommerce_paybox_gateway.class.php:358
+#@ openboutique_paybox_gateway
+msgid "Paiement déjà effectué"
+msgstr "Payement already dine"
+
+#: woocommerce_paybox_gateway.class.php:361
+#@ openboutique_paybox_gateway
+msgid "Abonné déjà existant (inscription nouvel abonné). Valeur 'U' de la variable PBX_RETOUR."
+msgstr "Existing subscriber (new subscriber registration). Value 'U' variable PBX_RETOUR."
+
+#: woocommerce_paybox_gateway.class.php:364
+#@ openboutique_paybox_gateway
+msgid "Carte non autorisée."
+msgstr "Unauthorized card."
+
+#: woocommerce_paybox_gateway.class.php:367
+#@ openboutique_paybox_gateway
+msgid "Carte non conforme. Code erreur renvoyé lors de la documentation de la variable « PBX_EMPREINTE »."
+msgstr "Map improper. Error code returned in the documentation of the \\\"PBX_EMPREINTE\\\" variable."
+
+#: woocommerce_paybox_gateway.class.php:370
+#@ openboutique_paybox_gateway
+msgid "Temps d'attente > 15 mn par l'internaute/acheteur au niveau de la page de paiements."
+msgstr "Waiting time > 15 minutes by the user / buyer at the payment page."
+
+#: woocommerce_paybox_gateway.class.php:374
+#@ openboutique_paybox_gateway
+msgid "Réservé"
+msgstr "Reserved"
+
+#: woocommerce_paybox_gateway.class.php:377
+#@ openboutique_paybox_gateway
+msgid "Code pays de l'adresse IP du navigateur de l'acheteur non autorisé."
+msgstr "Country code from browser buyer's IP unauthorized"
+
+#: woocommerce_paybox_gateway.class.php:381
+#@ openboutique_paybox_gateway
+msgid "Opération sans authentification 3-DSecure, bloquée par le filtre"
+msgstr "Operation without 3-DSecure authentification, blocked by the filter"
+
+#: woocommerce_paybox_gateway.class.php:384
+#@ openboutique_paybox_gateway
+msgid "Opération en attente de validation par l'emmetteur du moyen de paiement."
+msgstr "Operation pending validation by the issuer of the payment."
+
+#: woocommerce_paybox_gateway.class.php:388
+#@ openboutique_paybox_gateway
+msgid "Paiement refusé par le centre d'autorisation. En cas d'autorisation de la transaction par le centre d'autorisation de la banque, le code erreur '00100' sera en fait remplacé directement par '00000'."
+msgstr "Payment refused by the authorization center. In case of approval of the transaction by the bank authorization center, the error code '00100 'will in fact be directly replaced by '00000'."
+
+#: woocommerce_paybox_gateway.class.php:390
+#@ openboutique_paybox_gateway
+msgid "Pas de message"
+msgstr "No message"
+
+#: woocommerce_paybox_gateway.php:24
+#@ openboutique_paybox_gateway
+msgid "Le plugin WooCommerce doit être activé pour l'activation de l'extension"
+msgstr "The WooCommerce plugin must be activate to activate this one"
+
+#: woocommerce_paybox_gateway.php:29
+#@ openboutique_paybox_gateway
+msgid "Une erreur est survenue concernant WooCommerce : Les méthodes de paiement semblent introuvables"
+msgstr "An error occurred on WooCommerce: Payment methods seems not found"
+
+#: woocommerce_paybox_gateway.php:87
+#@ openboutique_paybox_gateway
+msgid "Paybox Return IP"
+msgstr "Paybox Return IP"
+
+#: woocommerce_paybox_gateway.php:87
+#@ openboutique_paybox_gateway
+msgid "PBX Sign"
+msgstr "PAYBOX Sign"
+
+#: woocommerce_paybox_gateway.php:112
+#@ openboutique_paybox_gateway
+msgid "Paybox Return OK"
+msgstr "Paybox Return OK"
+
+#: woocommerce_paybox_gateway.php:115
+#@ openboutique_paybox_gateway
+msgid "OK"
+msgstr "OK"
+
+#: woocommerce_paybox_gateway.php:117
+#: woocommerce_paybox_gateway.php:120
+#@ openboutique_paybox_gateway
+msgid "ERROR"
+msgstr "ERROR"
+
+#: woocommerce_paybox_gateway.php:117
+#@ openboutique_paybox_gateway
+msgid "Order Amount"
+msgstr "Order Amount"
+
+#: woocommerce_paybox_gateway.php:118
+#@ openboutique_paybox_gateway
+msgid "KO Amount modified"
+msgstr "KO Amount modified"
+
+#: woocommerce_paybox_gateway.php:120
+#@ openboutique_paybox_gateway
+msgid "Signature Rejected"
+msgstr "Signature Rejected"
+
+#: woocommerce_paybox_gateway.php:121
+#@ openboutique_paybox_gateway
+msgid "KO Signature"
+msgstr "KO Signature"
+
+#: woocommerce_paybox_gateway.php:123
+#@ openboutique_paybox_gateway
+msgid "PBX ERROR"
+msgstr "PAYBOX ERROR"
+
+#: woocommerce_paybox_gateway.php:124
+#@ openboutique_paybox_gateway
+msgid "OK received"
+msgstr "OK received"
+
+#: woocommerce_paybox_gateway.php:127
+#@ openboutique_paybox_gateway
+msgid "Test AutoResponse OK"
+msgstr "Test AutoResponse OK"
+
