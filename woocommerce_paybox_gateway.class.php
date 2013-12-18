@@ -304,9 +304,9 @@
 				$retour = shell_exec($exe . ' ' . $param);
 				if ($retour != '')
 					return str_replace('https://tpeweb.paybox.com/cgi/MYchoix_pagepaiement.cgi', $this->paybox_url, $retour);
-				return _('Permissions are not correctly set for file', 'openboutique_paybox_gateway').' '.$exe;
+				return __('Permissions are not correctly set for file', 'openboutique_paybox_gateway').' '.$exe;
 			}
-			return _('Paybox CGI module can not be found', 'openboutique_paybox_gateway');
+			return __('Paybox CGI module can not be found', 'openboutique_paybox_gateway');
 		}
 
 		static function getRealIpAddr() 
