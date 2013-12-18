@@ -109,7 +109,7 @@
 								// Si montant ok
 								if ((int) (100 * $order->get_total()) == (int) $_GET['montantbanque']) 
 								{
-									$order->add_order_note('<p style="color:green"><b>'.__('vPaybox Return OK', 'openboutique_paybox_gateway').'</b></p><br/>' . $std_msg);
+									$order->add_order_note('<p style="color:green"><b>'.__('Paybox Return OK', 'openboutique_paybox_gateway').'</b></p><br/>' . $std_msg);
 									$order->payment_complete();
 									unset($woocommerce->session->order_awaiting_payment);
 									wp_die(__('OK', 'openboutique_paybox_gateway'), '', array('response' => 200));
