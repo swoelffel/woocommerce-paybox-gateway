@@ -55,3 +55,13 @@ Nothing to do
 = 0.3.5 =   Mise à jour pour tenir compte de la documentation http://www1.paybox.com/telechargements/ManuelIntegrationPayboxSystem_V6.1_FR.pdf du 27/11/2013
 
 = 0.3.6 =   Issue correction while redirection timeout is not set / 3000 ms by default
+
+= 0.4.0 =	Fix links when using multisite with sub-directories
+			Fix non-default DB prefix
+			Improve checks on pages creation
+			Add security when activating plugin
+			Add FR & US translations
+			Rename shortcode
+			Update paybox image
+			Code cleanup & Optimizations
+			Check compatibility with WordPress 3.8
