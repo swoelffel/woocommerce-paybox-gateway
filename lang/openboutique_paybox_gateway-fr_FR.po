@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Paybox Payment Gateway v0.3.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-12-18 10:58:00+0000\n"
+"PO-Revision-Date: 2013-12-19 09:02:44+0000\n"
 "Last-Translator: ladoire <jladoire@castelis.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -230,7 +230,7 @@ msgstr "Veuillez entrer l'URL de réponse automatique de PayBox."
 #: woocommerce_paybox_gateway.class.php:197
 #@ openboutique_paybox_gateway
 msgid "Successful Return Link"
-msgstr "Lien de retour \\\"Reçue\\\""
+msgstr "Lien de retour 'Reçue'"
 
 #: woocommerce_paybox_gateway.class.php:199
 #@ openboutique_paybox_gateway
@@ -250,7 +250,7 @@ msgstr "."
 #: woocommerce_paybox_gateway.class.php:203
 #@ openboutique_paybox_gateway
 msgid "Failed Return Link"
-msgstr "Lien de retour \\\"Refusée\\\""
+msgstr "Lien de retour 'Refusée'"
 
 #: woocommerce_paybox_gateway.class.php:205
 #@ openboutique_paybox_gateway
@@ -260,7 +260,7 @@ msgstr "Veuillez entrer le lien de retour depuis PayBox lorsque la transaction e
 #: woocommerce_paybox_gateway.class.php:209
 #@ openboutique_paybox_gateway
 msgid "Cancel Return Link"
-msgstr "Lien de retour \\\"Annulée\\\""
+msgstr "Lien de retour 'Annulée'"
 
 #: woocommerce_paybox_gateway.class.php:211
 #@ openboutique_paybox_gateway
