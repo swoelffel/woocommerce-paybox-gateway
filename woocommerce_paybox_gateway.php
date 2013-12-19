@@ -16,7 +16,7 @@
 	if(!defined('ABSPATH'))
 		exit;
 
-	function activate()
+	function activate_paybox_gateway()
 	{
 		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		if( !is_plugin_active('woocommerce/woocommerce.php') )
@@ -30,7 +30,7 @@
 			exit;
 		}
 	}
-	register_activation_hook(__FILE__, 'activate');
+	register_activation_hook(__FILE__, 'activate_paybox_gateway');
 	add_action('plugins_loaded', 'woocommerce_paybox_init', 0);
 
 	function woocommerce_paybox_init()

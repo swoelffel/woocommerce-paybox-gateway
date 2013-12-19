@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Paybox Payment Gateway v0.3.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-12-18 11:19:00+0000\n"
+"PO-Revision-Date: 2013-12-19 09:04:57+0000\n"
 "Last-Translator: ladoire <jladoire@castelis.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -375,7 +375,7 @@ msgstr "Unauthorized card."
 #: woocommerce_paybox_gateway.class.php:367
 #@ openboutique_paybox_gateway
 msgid "Carte non conforme. Code erreur renvoyé lors de la documentation de la variable « PBX_EMPREINTE »."
-msgstr "Map improper. Error code returned in the documentation of the \\\"PBX_EMPREINTE\\\" variable."
+msgstr "Map improper. Error code returned in the documentation of the 'PBX_EMPREINTE' variable."
 
 #: woocommerce_paybox_gateway.class.php:370
 #@ openboutique_paybox_gateway
