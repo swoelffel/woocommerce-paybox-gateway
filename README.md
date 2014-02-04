@@ -65,3 +65,5 @@ Nothing to do
 			Update paybox image
 			Code cleanup & Optimizations
 			Check compatibility with WordPress 3.8
+			
+= 0.4.2 = 	Remove unneeded code
