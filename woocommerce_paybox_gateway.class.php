@@ -271,32 +271,7 @@
 			else // Pour linux 
 				$param .= ' PBX_RETOUR=order:R\\;erreur:E\\;carte:C\\;numauto:A\\;numtrans:S\\;numabo:B\\;montantbanque:M\\;sign:K';
 
-				$email_address = $order->billing_email;
-			if (empty($email_address) || !is_email($email_address))
-			{
-				$ids = $wpdb->get_result("
-					SELECT 
-						".$wpdb->base_prefix."users.ID 
-					FROM 
-						".$wpdb->base_prefix."users 
-					WHERE (
-						SELECT 
-							".$wpdb->base_prefix."usermeta.meta_value 
-						FROM 
-							".$wpdb->base_prefix."usermeta 
-						WHERE 
-							".$wpdb->base_prefix."usermeta.user_id = ".$wpdb->base_prefix."users.ID AND 
-							".$wpdb->base_prefix."usermeta.meta_key = '".$wpdb->base_prefix."capabilities'
-					) 
-					LIKE '%administrator%'");
-
-				if ($ids)
-				{
-					$current_user = get_user_by('id', $ids[0]);
-					$email_address = $current_user->user_mail;
-				}
-			}
-			$param .= ' PBX_PORTEUR=' . $email_address; //. $order->customer_user;
+			$param .= ' PBX_PORTEUR=' . $order->billing_email; //. $order->customer_user;
 			$exe = $this->paybox_exe;
 			if (file_exists($exe))
 			{
