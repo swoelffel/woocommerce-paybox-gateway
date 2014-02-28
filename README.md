@@ -67,3 +67,5 @@ Nothing to do
 			Check compatibility with WordPress 3.8
 			
 = 0.4.2 = 	Remove unneeded code
+
+= 0.4.3 =	Update to WooCommerce 2.X.X
