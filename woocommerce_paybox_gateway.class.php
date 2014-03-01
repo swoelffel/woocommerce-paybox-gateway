@@ -56,7 +56,7 @@
 						__('We have detected that Paybox return pages are not currently installed on your system', 'openboutique_paybox_gateway').'<br/>'.__('Press the install button to prevent 404 from users whom transaction would have been received, canceled or refused.', 'openboutique_paybox_gateway').
 					'</p>
 					<p>
-						<a class="button" target="_self" href="./admin.php?page=woocommerce_settings&tab=payment_gateways&section=WC_Paybox'.$install_url.'">'.__('Install return pages', 'openboutique_paybox_gateway').'</a>
+						<a class="button" target="_self" href="./admin.php?page=wc-settings&tab=checkout&section=wc_paybox'.$install_url.'">'.__('Install return pages', 'openboutique_paybox_gateway').'</a>
 					</p>';
 			} else { 
 				echo
