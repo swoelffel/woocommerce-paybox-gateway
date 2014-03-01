@@ -7,7 +7,7 @@
 	 * @author 	SWO (OpenBoutique)
 	 * @category 	Shortcodes
 	 * @package 	WordPress
-	 * @version     0.4.2
+	 * @version     0.4.3
 	 */
 
 	/**
