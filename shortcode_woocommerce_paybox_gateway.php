@@ -7,8 +7,10 @@
 	 * @author 	SWO (OpenBoutique)
 	 * @category 	Shortcodes
 	 * @package 	WordPress
-	 * @version     0.4.3
+	 * @version     0.4.4
 	 */
+
+class WC_Shortcode_Paybox_Thankyou {
 
 	/**
 	 * Get the thankyou shortcode content.
@@ -17,10 +19,9 @@
 	 * @param array $atts
 	 * @return string
 	 */
-	function get_shortcode_woocommerce_paybox_gateway_thanks( $atts )
+	public static function get( $atts )
 	{
-		global $woocommerce;
-		return $woocommerce->shortcode_wrapper('woocommerce_paybox_gateway_thanks', $atts);
+            return WC_Shortcodes::shortcode_wrapper( array( __CLASS__, 'output' ), $atts );
 	}
 
 	/**
@@ -30,12 +31,9 @@
 	 * @param mixed $atts
 	 * @return void
 	 */
-	function woocommerce_paybox_gateway_thanks( $atts )
+	public static function output( $atts )
 	{
-		global $woocommerce;
-
-		$woocommerce->nocache();
-		$woocommerce->show_messages();
+		wc_print_notices();
 
 		// Pay for order after checkout step
 		if (isset($_GET['order'])) 
@@ -45,13 +43,14 @@
 		//if (isset($_GET['key'])) $order_key = $_GET['key']; else $order_key = '';
 
 		// Empty awaiting payment session
-		unset( $woocommerce->session->order_awaiting_payment );
+                unset( WC()->session->order_awaiting_payment );
 
 		if ($order_id > 0)
 			$order = new WC_Order( $order_id );
 		else
 			$order = false;
 
-		woocommerce_get_template( 'checkout/thankyou.php', array( 'order' => $order ) );
+		wc_get_template( 'checkout/thankyou.php', array( 'order' => $order ) );
 	}
+}
 ?>

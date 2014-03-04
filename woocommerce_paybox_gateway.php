@@ -3,7 +3,7 @@
 	 * Plugin Name: WooCommerce Paybox Payment Gateway
 	 * Plugin URI: http://www.openboutique.fr/
 	 * Description: Gateway e-commerce pour Paybox.
-	 * Version: 0.4.3
+	 * Version: 0.4.4
 	 * Author: SWO (Open Boutique)
 	 * Author URI: http://www.openboutique.fr/
 	 * License: GPL version 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -49,7 +49,7 @@
 		// Chargement des traductions
 		load_plugin_textdomain('openboutique_paybox_gateway', false, dirname(plugin_basename(__FILE__)).'/lang/');
 
-		add_shortcode(THANKS_SHORTCODE, 'get_shortcode_woocommerce_paybox_gateway_thanks');
+                add_shortcode( THANKS_SHORTCODE, 'WC_Shortcode_Paybox_Thankyou::get' );
 		add_filter('woocommerce_payment_gateways', 'add_paybox_commerce_gateway');
 		add_action('init', 'woocommerce_paybox_check_response');
 	}
@@ -73,7 +73,6 @@
 	{
 		if (isset($_GET['order']) && isset($_GET['sign']))
 		{ // On a bien un retour ave une commande et une signature
-			global $woocommerce;
 			$order = new WC_Order((int) $_GET['order']); // On récupère la commande
 			$pos_qs = strpos($_SERVER['REQUEST_URI'], '?');
 			$pos_sign = strpos($_SERVER['REQUEST_URI'], '&sign=');
@@ -111,7 +110,7 @@
 								{
 									$order->add_order_note('<p style="color:green"><b>'.__('Paybox Return OK', 'openboutique_paybox_gateway').'</b></p><br/>' . $std_msg);
 									$order->payment_complete();
-									unset($woocommerce->session->order_awaiting_payment);
+									unset( WC()->session->order_awaiting_payment );
 									wp_die(__('OK', 'openboutique_paybox_gateway'), '', array('response' => 200));
 								}
 								$order->add_order_note('<p style="color:red"><b>'.__('ERROR', 'openboutique_paybox_gateway').'</b></p> '.__('Order Amount', 'openboutique_paybox_gateway').'.<br/>' . $std_msg);

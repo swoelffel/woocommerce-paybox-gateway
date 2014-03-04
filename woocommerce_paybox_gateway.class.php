@@ -7,7 +7,6 @@
 	{
 		function __construct()
 		{
-			global $woocommerce;
 			$this->id = 'paybox';
 			$this->icon = PLUGIN_DIR . '/images/paybox.png';
 			$this->has_fields = false;
@@ -19,9 +18,6 @@
 			// Get setting values
 			foreach ($this->settings as $key => $val)
 				$this->$key = $val;
-			// Logs
-			if ($woocommerce->debug == 'yes')
-				$this->log = $woocommerce->logger();
 			// Ajout des Hooks
 			add_action('woocommerce_update_options_payment_gateways', array(&$this, 'process_admin_options'));
 			add_action('woocommerce_update_options_payment_gateways_' . $this->id, array($this, 'process_admin_options'));
