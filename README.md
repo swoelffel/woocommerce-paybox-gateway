@@ -71,3 +71,5 @@ Nothing to do
 = 0.4.3 =	Update to WooCommerce 2.X.X
 
 = 0.4.4 =	Update ShortCodes to WooCommerce 2.X.X / Code cleaning / Optimization
+
+= 0.4.5 =	Fix ShortCode
