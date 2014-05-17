@@ -5,22 +5,35 @@
 */
 
 #wc-ob-pbx-admin {
-    background: url("http://www.openboutique.net/wp-content/uploads/2013/08/LOGO-OPEN-BOUTIQUE-300x46.png?v=woocommerce-paybox-gateway-0.4.0") no-repeat scroll 15px 18px #FFFFFF;
+    background: url("http://www.openboutique.net/wp-content/uploads/2013/08/LOGO-OPEN-BOUTIQUE-300x46.png?v=woocommerce-paybox-gateway-0.4.6") no-repeat scroll 15px 18px #FFFFFF;
     border: 1px solid #F96E5B;
     box-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5) inset, -1px -1px 0 rgba(255, 255, 255, 0.5) inset;
     padding: 15px 0px 10px 350px;
-    border-radius: 5px;
+    border-radius: 0px;
     margin: 1em 0 2em;
     position: relative;
 }
 
 #ob-paybox_help_div {
+    position: relative;
+    top: -60px;
     display: none
 }
 
 #ob-paybox_baseline {
     position: relative;
-    left: -315px;
-    top: 50px;
-	max-width: 300px;
+    left: -330px;
+    top: 60px;
+    max-width: 300px;
+}
+
+#ob-paybox_help_main1 {
+    position: relative;
+    top: -60px;
+}
+
+#ob-paybox_help_main2 {
+    position: relative;
+    left: 1px;
+    top: -60px;
 }

@@ -7,7 +7,7 @@
 	 * @author 	SWO (OpenBoutique)
 	 * @category 	Shortcodes
 	 * @package 	WordPress
-	 * @version     0.4.5
+	 * @version     0.4.6
 	 */
 
 	class WC_Shortcode_Paybox_Thankyou 
